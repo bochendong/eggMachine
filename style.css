@@ -82,6 +82,7 @@
     width: 13rem;
     height: 13rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -94,7 +95,6 @@
     height: auto;
 }
 .ball_bottom{
-    width: 100%;
     height: 4rem;
     background: url("./images/egg/ball_bottom.png") no-repeat center;
     background-size:80%;
@@ -128,7 +128,7 @@
 .body>.logo{
     width: 80%;
     height: 5rem;
-    background: url("images/egg/text.png") no-repeat center;
+    
     background-size: contain;
     position: absolute;
     margin-left: -40%;
@@ -215,9 +215,7 @@
 .ruler_body:before,.present_body:before,.showPresent_body:before{
     width: 110%;
     height: 2rem;
-    background: url("images/eggModal/ruleheader.png") no-repeat center;
     background-size: contain;
-    content: '活动规则';
     position: absolute;
     text-align: center;
     line-height: 1.5rem;
@@ -227,8 +225,6 @@
     margin-left: -10%;
 }
 .showPresent_body:before{
-    background: url(images/eggModal/get.png) no-repeat bottom;
-    content: '我又扭到了';
     height: 8rem;
     margin-top: -8.5rem;
     background-size: contain!important;
@@ -239,7 +235,7 @@
 }
 .nothing:before{
     background: url(images/eggModal/notGet.png) no-repeat bottom;
-    content: '什么都没扭到';
+    content: '结果';
 }
 .present_body:before{
     content: '';
@@ -273,13 +269,14 @@
     color: white;
     text-align: center;
     width: 90%;
+    max-height: 1rem;
     margin-left: 5%;
-    height: 2rem;
     border-radius: 1rem;
     font-size: 0.8rem;
-    line-height: 2rem;
+    line-height: 1rem;
     margin-top: 0.8rem;
 }
+
 .present_select_box{
     background-color: #377CC1;
     color: white;
@@ -476,3 +473,19 @@
     background: url("images/eggModal/typeno.png") no-repeat center;
     background-size: contain;
 }
+
+
+.showPresent_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.present-image {
+    width: 600px;  /* 固定宽度 */
+    height: 600px; /* 固定高度 */
+    object-fit: fill; /* 保持图片比例，裁剪多余部分 */
+    margin: 20px;
+}
+

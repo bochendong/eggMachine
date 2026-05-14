@@ -1,5 +1,6 @@
 var move =false;
 function moveChange() {
+    console.log("clicked")
     this.img1 = new Image();
     this.img1.src = './images/egg/EMO-01.png';
     this.img2 = new Image();
@@ -25,13 +26,55 @@ function moveChange() {
         setTimeout(()=>{
             var ballGet = document.getElementById('ball');
         ballGet.parentNode.removeChild(ballGet);
-        if(num<3){
-            let showPresent = new ShowPresent('ShowPresent');
-            showPresent.add({text:'123',type:false,adage:'XXXXXX',content:[{color:'blue',text:'123',number:5},{color:'red',text:'1235',number:'4'}]})
-        }else{
-            let showPresent = new ShowPresent('ShowPresent');
-            showPresent.add({text:'123',type:true,adage:'XXXXXX',content:[{color:'blue',text:'123',number:5},{color:'red',text:'1235',number:'4'}]})
+
+        let imageUrl;
+        let randomNum = Math.random();
+        if (randomNum < 0.6) {
+            let aImages = [
+              "A0.png",
+              "A1.png",
+              "A2.png",
+              "A3.png",
+              "A4.png",
+              "A5.png",
+              "A6.png",
+              "A7.png",
+              "A8.png",
+              "A9.png",
+              "A10.png",
+              "A11.png",
+              "A12.png",
+              "A13.png",
+            ];
+
+            let index = Math.floor(Math.random() * aImages.length);
+            console.log(index)
+            
+            let randomAImage = aImages[index];
+          imageUrl = `./images/cat/${randomAImage}`;
+        } else if (randomNum < 0.95) {
+          let aImages = ["B0.png", "B1.png", "B2.png", "B3.png", "B4.png", "B5.png", "B6.png", "B7.png", "B8.png", "B9.png", "B10.png", "B11.png", "B12.png", "B13.png",];
+          let index = Math.floor(Math.random() * aImages.length);
+          console.log(index);
+
+          let randomAImage = aImages[index];
+          imageUrl = `./images/cat/${randomAImage}`;
+        } else {
+          let aImages = ["C0.png", "C1.png", "C2.png", "C3.png"];
+          let index = Math.floor(Math.random() * aImages.length);
+          console.log(index);
+
+          let randomAImage = aImages[index];
+          imageUrl = `./images/cat/${randomAImage}`;
         }
+
+        let showPresent = new ShowPresent('ShowPresent');
+        showPresent.add({text:'123',
+            type:false,adage:'XXXXXX',
+            imageUrl: imageUrl,
+            content:[{color:'blue',text:'123',number:5},
+            {color:'red',text:'1235',number:'4'}]})
+        
     },2000)
     },3000)
     }
@@ -407,14 +450,20 @@ ShowPresent.prototype.init = function (value) {
     var showPresentAd = document.createElement('div');
     var showPresentText = document.createElement('div');
     var showPresentBtn = document.createElement('div');
+    var showPresentImage = document.createElement("img");
+
+    showPresentImage.src = value.imageUrl;
+    showPresentImage.className = "present-image";
+
     showPresentBox.id = this.id;
     showPresentBox.className = '_box';
-    showPresentBody.className = value.type === true?'showPresent_body':'showPresent_body nothing';
+    showPresentBody.className = 'showPresent_body';
     showPresentMain.className = '_main';
     showPresentBtn.className = '_btn';
     showPresentBtn.onclick = this.deleteThis;
     showPresentText.innerText = value.adage;
-    showPresentBtn.innerText = value.type === true?'我真棒':'我要坚持';
+    showPresentBtn.innerText = "关闭";
+
     var domText = '';
     value.type === true?
         value.content.forEach(function (item) {
@@ -423,12 +472,10 @@ ShowPresent.prototype.init = function (value) {
         value.content.forEach(function (item) {
             domText += `<div><div class="typeblack"></div><div class="showPresent_text">${item.text}</div><div class="typeno"></div></div>`
         });
-    showPresent.innerHTML = domText;
-    showPresentBox.appendChild(showPresentMain);
-    showPresentMain.appendChild(showPresentBody);
-    showPresentBody.appendChild(showPresent);
-    showPresentBody.appendChild(showPresentAd);
-    showPresentBody.appendChild(showPresentText);
+
+    showPresentBody.appendChild(showPresentImage);
     showPresentBody.appendChild(showPresentBtn);
+    showPresentMain.appendChild(showPresentBody);
+    showPresentBox.appendChild(showPresentMain);
     return showPresentBox;
 };
